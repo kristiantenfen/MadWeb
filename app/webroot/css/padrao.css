@@ -1,0 +1,21 @@
+/* 
+    Document   : padrao
+    Created on : 09/08/2013, 17:45:16
+    Author     : Senai
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+
+.cheques{
+    float: right;
+    width: 400px;
+    
+}
+.datacheque{
+    float: right;
+}
