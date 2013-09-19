@@ -6,16 +6,51 @@
 			<?php echo h($venda['Venda']['id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Valor Metro'); ?></dt>
+		<dt><?php echo __('Valor'); ?></dt>
 		<dd>
 			<?php echo h($this->Number->currency($venda['Venda']['valor_total'], 'Br')); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Metros'); ?></dt>
+                <dt><?php echo __('Situação'); ?></dt>
+		<dd>
+			<?php switch ($venda['Venda']['situacao_financeira']){
+                    
+                                    case true:
+                                        echo 'Pago';
+                                        break;
+                                    case false:
+                                        echo 'Pendente';
+                                        break;
+                                    
+                    
+                                } ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Quantidade'); ?></dt>
 		<dd>
 			<?php echo h($venda['Venda']['quantidade']); ?>
 			&nbsp;
 		</dd>
+                <dt><?php echo __('Tipo'); ?></dt>
+		<dd>
+                    
+			<?php switch ($venda['Venda']['tipo']){
+                    
+                                    case 1:
+                                        echo $tipos[1];
+                                        break;
+                                    case 2:
+                                        echo $tipos[2];
+                                        break;
+                                    case 3;
+                                        echo $tipos[3];
+                                        break;
+                    
+                        }
+                        ?>
+			&nbsp;
+		</dd>
+                
 		<dt><?php echo __('Data'); ?></dt>
 		<dd>
 			<?php echo h($this->Locale->date($venda['Venda']['data'], true)); ?>

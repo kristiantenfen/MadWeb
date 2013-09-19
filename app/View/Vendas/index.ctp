@@ -1,5 +1,5 @@
 <div class="vendas index">
-	<h2><?php echo __('Vendas'); ?></h2>
+    <h2><?php echo __('Vendas'); ?></h2>
         <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('Nova Venda'), array('action' => 'add'), array('class' => 'btn btn-success')); ?></li>
@@ -12,7 +12,9 @@
 			<th><?php echo $this->Paginator->sort('cliente'); ?></th>
 			<th><?php echo $this->Paginator->sort('data'); ?></th>
 			<th><?php echo $this->Paginator->sort('quantidade'); ?></th>
+                        <th><?php echo $this->Paginator->sort('tipo'); ?></th>
 			<th><?php echo $this->Paginator->sort('valor_total'); ?></th>
+                        <th><?php echo $this->Paginator->sort('situacao_financeira'); ?></th>
 			<th class="actions"><?php echo __('Ações'); ?></th>
 	</tr>
 	<?php foreach ($vendas as $venda): ?>
@@ -21,7 +23,31 @@
 		<td><?php echo h($venda['Venda']['cliente']); ?>&nbsp;</td>
 		<td><?php echo h($this->Locale->date($venda['Venda']['data'], true)); ?>&nbsp;</td>
 		<td><?php echo h($venda['Venda']['quantidade']); ?>&nbsp;</td>
+                <td><?php switch ($venda['Venda']['tipo']){
+                    
+                                    case 1:
+                                        echo $tipos[1];
+                                        break;
+                                    case 2:
+                                        echo $tipos[2];
+                                        break;
+                                    case 3;
+                                        echo $tipos[3];
+                                        break;
+                    
+                                } ?>&nbsp;</td>
 		<td><?php echo h($this->Number->currency($venda['Venda']['valor_total'], 'Br')); ?>&nbsp;</td>
+                <td><?php switch ($venda['Venda']['situacao_financeira']){
+                    
+                                    case true:
+                                        echo 'Pago';
+                                        break;
+                                    case false:
+                                        echo 'Pendente';
+                                        break;
+                                    
+                    
+                                } ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__(''), array('action' => 'view', $venda['Venda']['id']), array('class' => 'icon-zoom-in', 'title' => 'Visualizar')); ?>
 			<?php echo $this->Html->link(__(''), array('action' => 'edit', $venda['Venda']['id']), array('class' => 'icon-pencil', 'title' => 'Editar')); ?>

@@ -7,6 +7,8 @@ App::uses('AppController', 'Controller');
  */
 class VendasController extends AppController {
 
+    public $tipos = array(1 => 'Madeira', 2 => 'Custaneira', 3 => 'Pó de serra');
+    
 /**
  * index method
  *
@@ -15,6 +17,7 @@ class VendasController extends AppController {
 	public function index() {
 		$this->Venda->recursive = 0;
 		$this->set('vendas', $this->paginate());
+                $this->set('tipos', $this->tipos);
 	}
 
 /**
@@ -30,6 +33,7 @@ class VendasController extends AppController {
 		}
 		$options = array('conditions' => array('Venda.' . $this->Venda->primaryKey => $id));
 		$this->set('venda', $this->Venda->find('first', $options));
+                $this->set('tipos', $this->tipos);
 	}
 
 /**
@@ -47,6 +51,8 @@ class VendasController extends AppController {
 				$this->Session->setFlash(__('Nova Venda não pode ser cadastrada. Tente novamente'), 'erro');
 			}
 		}
+                $tipos = $this->tipos;
+                $this->set(compact('tipos'));
 	}
 
 /**
@@ -71,6 +77,8 @@ class VendasController extends AppController {
 			$options = array('conditions' => array('Venda.' . $this->Venda->primaryKey => $id));
 			$this->request->data = $this->Venda->find('first', $options);
 		}
+                $tipos = $this->tipos;
+                $this->set(compact('tipos'));
 	}
 
 /**

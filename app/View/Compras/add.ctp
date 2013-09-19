@@ -4,6 +4,7 @@
 		<legend><?php echo __('Adicionar Compra'); ?></legend>
 	<?php
 		echo $this->Form->input('quantidade');
+               
 		echo $this->Form->radio('tipo_compra', array('Metro' => 'Metro', 'Tonelada' => 'Tonelada'),
                                  array('legend' => false) 
                                     );
