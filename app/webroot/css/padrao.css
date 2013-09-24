@@ -10,10 +10,20 @@ root {
     display: block;
 }
 
+a:hover{
+    text-decoration: none; 
+}
 
-.cheques{
-    float: right;
-    width: 400px;
+.comprasIndex, .vendasIndex, .resumoIndex, .custosIndex{
+    width: 230px;
+    float: left;
+    margin-left: 40px;
+}
+
+.chequesIndex{
+    float: left;
+    width: 80%;
+    margin-left: 40px;
     
 }
 .datacheque{

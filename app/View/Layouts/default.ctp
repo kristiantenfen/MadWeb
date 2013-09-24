@@ -33,6 +33,7 @@ $cakeDescription = __d('cake_dev', 'MADWeb');
 		echo $this->Html->css('bootstrap');
 		echo $this->Html->css('opa-icons');
 		echo $this->Html->css('padrao');
+                echo $this->Html->css('style');
 		echo $this->Html->css('ui/jquery-ui-1.10.3.custom.min');
 		
 		

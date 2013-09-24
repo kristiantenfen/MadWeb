@@ -32,7 +32,7 @@ App::uses('AppController', 'Controller');
 class PagesController extends AppController {
 
     
-    public $uses = array('Cheque');
+    public $uses = array('Cheque', 'Custo', 'Compra', 'Venda');
     
 /**
  * Controller name
@@ -52,6 +52,20 @@ class PagesController extends AppController {
           $hoje = date('Y-m-d');
           $cheques = $this->Cheque->find('all',array('conditions' => array('data >=' => $hoje), 'order' => 'data asc', 'limit' => 10));
           $this->set('cheques', $cheques);
+          
+          $mes = date('Y-m');
+          
+          $conditionsCusto = array('fields'=>array('SUM(Custo.valor) as total'),'conditions'=>array('data BETWEEN ? AND ?'=>array($mes.'-01',$mes.'-30')));
+          $custo = $this->Custo->find('first', $conditionsCusto);
+          $this->set('custo', $custo);
+          
+          $conditionsCompra = array('fields'=>array('SUM(Compra.valor) as total'),'conditions'=>array('data BETWEEN ? AND ?'=>array($mes.'-01',$mes.'-30')));
+          $compra = $this->Compra->find('first', $conditionsCompra);
+          $this->set('compra', $compra);
+          
+          $conditionsVenda = array('fields'=>array('SUM(Venda.valor_total) as total'),'conditions'=>array('data BETWEEN ? AND ?'=>array($mes.'-01',$mes.'-30')));
+          $venda = $this->Venda->find('first', $conditionsVenda);
+          $this->set('venda', $venda);
           
       }  
 
