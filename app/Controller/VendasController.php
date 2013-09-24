@@ -15,6 +15,32 @@ class VendasController extends AppController {
  * @return void
  */
 	public function index() {
+            
+            // Add filter
+            $this->FilterResults->addFilters(array('AND' => array( 
+                    'data' => array(
+                        'Venda.data' => array(
+                            'operator' => 'BETWEEN',
+                            'between' => array(
+                                'text' => __(' and ', true)
+                            )
+                        )
+                    ),
+                    'tipo' => array(
+                        'Venda.tipo' => array(
+                            'operator' => '=',
+                            'select' => array(null => 'Todos', $this->tipos)
+                        )),
+               
+               )
+                )
+            );
+
+            // Define conditions
+            $this->FilterResults->setPaginate('conditions', $this->FilterResults->getConditions());
+
+            
+            
 		$this->Venda->recursive = 0;
 		$this->set('vendas', $this->paginate());
                 $this->set('tipos', $this->tipos);

@@ -7,14 +7,45 @@ App::uses('AppController', 'Controller');
  */
 class ComprasController extends AppController {
 
+    
+    
+    public $tipos = array('Metro' => 'Metro', 'Tonelada' => 'Tonelada');
 /**
  * index method
  *
  * @return void
  */
 	public function index() {
+            
+             // Add filter
+            $this->FilterResults->addFilters(array('AND' => array( 
+                    'data' => array(
+                        'Compra.data' => array(
+                            'operator' => 'BETWEEN',
+                            'between' => array(
+                                'text' => __(' and ', true)
+                            )
+                        )
+                    ),
+                    'tipo' => array(
+                        'Compra.tipo_compra' => array(
+                            'operator' => '=',
+                            'select' => array(null => 'Todos', $this->tipos)
+                        )),
+               
+               )
+                )
+            );
+
+            // Define conditions
+            $this->FilterResults->setPaginate('conditions', $this->FilterResults->getConditions());
+
+            
+            
+            
 		$this->Compra->recursive = 0;
 		$this->set('compras', $this->paginate());
+                $this->set('tipos', $this->tipos);
 	}
 
 /**
@@ -47,6 +78,7 @@ class ComprasController extends AppController {
 				$this->Session->setFlash(__('Nova compra não pode ser cadastrada. Tente novamente'), 'erro');
 			}
 		}
+                $this->set('tipos', $this->tipos);
 	}
 
 /**
@@ -71,6 +103,7 @@ class ComprasController extends AppController {
 			$options = array('conditions' => array('Compra.' . $this->Compra->primaryKey => $id));
 			$this->request->data = $this->Compra->find('first', $options);
 		}
+                $this->set('tipos', $this->tipos);
 	}
 
 /**
