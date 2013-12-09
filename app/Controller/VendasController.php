@@ -30,7 +30,14 @@ class VendasController extends AppController {
                         'Venda.tipo' => array(
                             'operator' => '=',
                             'select' => array(null => 'Todos', $this->tipos)
-                        )),
+                        )
+                        ),
+                'status' => array(
+                        'Venda.situacao_financeira' => array(
+                            'operator' => '=',
+                            'select' => array(null => 'Todos', 1 => 'Pago', 2 => 'Pendente')
+                        )
+                        ),
                
                )
                 )
@@ -39,7 +46,7 @@ class VendasController extends AppController {
             // Define conditions
             $this->FilterResults->setPaginate('conditions', $this->FilterResults->getConditions());
 
-            
+            var_dump($this->FilterResults->getConditions());
             
 		$this->Venda->recursive = 0;
 		$this->set('vendas', $this->paginate());

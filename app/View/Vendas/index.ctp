@@ -10,6 +10,7 @@
     <?php
                 echo $this->FilterForm->create();
                 echo $this->FilterForm->input('tipo');
+                echo $this->FilterForm->input('status');
                 echo $this->FilterForm->input('data', array('type' => 'text', 'class' => 'date'));
                 echo $this->FilterForm->end(array('label' => 'Buscar', 'class' => 'btn btn-primary', 'div' => false));
             ?>
